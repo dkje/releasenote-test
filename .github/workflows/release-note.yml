@@ -3,7 +3,7 @@ name: Release Drafter
 on:
   push:
     branches:
-      - develop
+      - main
   pull_request:
     types: [opened, reopened, synchronize]
 
@@ -19,4 +19,4 @@ jobs:
     steps:
       - uses: release-drafter/release-drafter@v6
         env:
-          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+          GIT_TOKEN: ${{ env.GIT_TOKEN }}
