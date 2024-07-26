@@ -21,16 +21,23 @@ jobs:
           github-token: ${{ secrets.GIT_TOKEN }}
           script: |
             const branchName = '${{ steps.extract_branch.outputs.branch }}';
+            const labelHead = branchName.split('/')[0];
             let label = '';
-
-            if (branchName.startsWith('feature/')) {
-              label = 'feature';
-            } else if (branchName.startsWith('fix/')) {
-              label = 'fix';
-            } else if (branchName.startsWith('chore/')) {
-              label = 'chore';
-            } else if (branchName.startsWith('build/')) {
-              label = 'build';
+            switch (labelHead) {
+              case 'feature':
+                label = '✨ Feature';
+                break;
+              case 'fix':
+                label = '🐞 Bugfix';
+                break;
+              case 'improve':
+                label = '🛠️ Improvement';
+                break;
+              case 'refactor':
+                label = '🔨 Refactor';
+                break;
+              default:
+                label = 'etc';
             }
 
             if (label) {
