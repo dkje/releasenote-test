@@ -31,7 +31,7 @@ jobs:
                 label = '🐞 Bugfix';
                 break;
               case 'improve':
-                label = '🛠️ Improvement';
+                label = '🫶🏻 Improvement';
                 break;
               case 'refactor':
                 label = '🔨 Refactor';
