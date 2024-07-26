@@ -1,0 +1,43 @@
+name: Auto Label PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  auto-label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_HEAD_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Add label based on branch name
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const branchName = '${{ steps.extract_branch.outputs.branch }}';
+            let label = '';
+
+            if (branchName.startsWith('feature/')) {
+              label = 'feature';
+            } else if (branchName.startsWith('fix/')) {
+              label = 'fix';
+            } else if (branchName.startsWith('chore/')) {
+              label = 'chore';
+            } else if (branchName.startsWith('build/')) {
+              label = 'build';
+            }
+
+            if (label) {
+              github.rest.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: [label]
+              });
+            }
