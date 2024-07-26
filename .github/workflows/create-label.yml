@@ -18,7 +18,7 @@ jobs:
       - name: Add label based on branch name
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GIT_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const branchName = '${{ steps.extract_branch.outputs.branch }}';
             const labelHead = branchName.split('/')[0];

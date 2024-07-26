@@ -6,7 +6,7 @@ categories:
   - title: "🐞 자잘한 버그를 수정했습니다."
     label: "🐞 Bugfix"
   - title: "🫶🏻 앱 사용성 개선에 힘썼습니다."
-    label: "🛠️ Improvement"
+    label: "🫶🏻 Improvement"
   - title: "🛠️ 더 나은 코드를 위해 노력하고 있습니다."
     labels:
       - "🔨 Refactor"
